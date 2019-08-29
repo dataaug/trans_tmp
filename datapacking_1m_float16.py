@@ -20,8 +20,8 @@ import os
 import sys
 import re
 
-start_date = '2013-05'
-end_date = '2019-01'
+start_date = '2013-05-13'
+end_date = '2019-01-31'
 input_dir0 = '/data/pkudata/stock-raw-data/indicator_1m/'
 input_dir1 = '/data/pkudata/stock-raw-data/indicator_1m_from_LEVEL2_3S/'
 output_dir = '/data/pkudata/stock-raw-data/lmdb_1m_v2/'
@@ -44,10 +44,10 @@ for arg in sys.argv:
         filename_prefix = arg[6:]
 
 assert lookback_n >= 0, 'Illegal lookback_n value!'
-filelist0 = os.listdir(input_dir0)
+filelist0 = os.listdir(input_dir0).sort()
 start_loc = np.where(np.array(filelist0)>=start_date)[0][0]
 filelist0 = filelist0[start_loc-lookback_n:]
-filelist1 = os.listdir(input_dir1)
+filelist1 = os.listdir(input_dir1).sort()
 start_loc = np.where(np.array(filelist1)>=start_date)[0][0]
 filelist1 = filelist1[start_loc-lookback_n:]
 LogCol = ['SumActBuy1M', 'SumActSell1M', 'MeanActBuy1M', 'MeanActSell1M',
